@@ -15,12 +15,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController customerController = TextEditingController();
   TextEditingController billController = TextEditingController();
   TextEditingController taxController = TextEditingController();
-  int? customer;
-  int? bill;
-  int? sum;
-  int? tax;
-  int? seprateprice;
-  int percentage = 100;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +40,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   onSaved: (val) {
                     customer = int.parse(val!);
+                    customer = customer;
                   },
                   decoration: InputDecoration(
                     labelText: "Number of Customer",
@@ -76,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                     return null;
                   },
                   onSaved: (val) {
-                    bill = int.parse(val!);
+                    taxableamount = int.parse(val!);
                   },
                   decoration: InputDecoration(
                     labelText: "Enter Taxable Amount",
@@ -129,16 +125,23 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      if (insertKey.currentState!.validate()) {
-                        insertKey.currentState!.save();
-                        Globals.sum = bill! + tax!;
-                        print("${sum}");
-                      }
-                    },
-                    child: Text("Calculate")),
-                Text("Total is ${sum}"),
+               ElevatedButton(onPressed: (){
+                  setState(() {
+                        if (insertKey.currentState!.validate()) {
+                          insertKey.currentState!.save();
+                          sum = taxableamount! + taxableamount!*(tax! / 100);
+                          seprate = sum! / customer!;
+                        }
+                      });
+               }, child: Text("Calculate"),),
+              Container(
+                padding: EdgeInsets.all(20),
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+                child: Column(children: [
+                  Text("Splitting amount  out of ${sum} divided by ${customer} is = ${seprate} ")
+                ]),
+              )
               ],
             )),
       ),

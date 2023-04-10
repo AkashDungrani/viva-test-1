@@ -1,6 +1,6 @@
-class Globals {
-  static int? customer;
-  static int? taxableamount;
-  static int? tax;
-  static int? sum;
-}
+int? customer ;
+int? taxableamount ;
+int? tax ;
+double? sum ;
+double? seprate;
+double? divide;
